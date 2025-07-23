@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="pb-2 mb-4 border-bottom">
+    <h1>{{ page_title }}</h1>
+</div>
+
+<div class="row">
+    {% for product in products %}
+        <div class="col-md-4 col-sm-6">
+            <div class="card shadow-sm">
+                <img src="{{ product.image_url if product.image_url else 'https://via.placeholder.com/300' }}" class="card-img-top" alt="{{ product.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text fs-4 text-danger">
+                        <strong>Needs: {{ product.needed_qty }}</strong>
+                    </p>
+                    <small class="text-muted">Current Stock: {{ product.current_qty }} | Threshold: {{ product.threshold }}</small>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="col">
+            <div class="alert alert-info" role="alert">
+                No products need restocking in this category.
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

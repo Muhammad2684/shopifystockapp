@@ -1,0 +1,20 @@
+body {
+    padding-top: 70px; /* Prevent content from hiding behind the fixed navbar */
+}
+
+.card {
+    margin-bottom: 1.5rem;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 20vw;
+    object-fit: cover;
+}
+
+/* On smaller screens, make image height more reasonable */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 40vw;
+    }
+}

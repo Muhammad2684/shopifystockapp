@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="pb-2 mb-4 border-bottom">
+    <h1 class="text-danger">Urgent - Negative Stock</h1>
+    <p class="lead",>Negative Inventory</p>
+</div>
+
+<div class="row">
+    {% for product in products %}
+        <div class="col-md-4 col-sm-6">
+            <div class="card border-danger shadow-sm">
+                <img src="{{ product.image_url if product.image_url else 'https://via.placeholder.com/300' }}" class="card-img-top" alt="{{ product.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text fs-4 text-danger">
+                        <strong>Needed : {{ product.needed_qty }}</strong>
+                    </p>
+                    <small class="text-muted">Current Stock: {{ product.current_qty }}</small>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="col">
+            <div class="alert alert-success" role="alert">
+                No products have negative stock levels.
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
