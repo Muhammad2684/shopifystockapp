@@ -122,13 +122,15 @@ def show_urgent():
                     "title": node['title'],
                     "image_url": node['featuredImage']['url'] if node['featuredImage'] else None,
                     "current_qty": current_qty,
-                    "needed_qty": 1 - current_qty # Calculate qty needed to get to 1
+                    "needed_qty": 0 - current_qty # Calculate qty needed to get to 0
                 }
                 products_to_display.append(product_data)
 
+    sorted_products = sorted(products_to_display, key=lambda p: p['needed_qty'], reverse=True)
+
     return render_template(
         'urgent_page.html', 
-        products=products_to_display, 
+        products=sorted_products, 
         page_title="Urgent"
     )
 
@@ -187,9 +189,11 @@ def show_category(category_slug):
             product['needed_qty'] = needed_qty
             products_to_display.append(product)
 
+    sorted_products = sorted(products_to_display, key=lambda p: p['needed_qty'], reverse=True)
+
     return render_template(
         'category_page.html',
-        products=products_to_display,
+        products=sorted_products,
         page_title=category["title"]
     )
 
